@@ -23,16 +23,20 @@ for items in contacts_list:
     items[1] = c[0]
     items[2] = c[1]
 
-print(contacts_list)
+for items in contacts_list:
+  for i, n in enumerate(items):
+    pat_1 = re.compile('(\+?)(7|8)(\ ?)(\(?)(\d{3})(\)?)(\-?)(\ ?)(\d{3})(\-?)(\d{2})(\-?)(\d{2})')
+    res_1 = re.sub(pat_1, r'+7(\5)\9-\11-\13', n)
+    items[i] = res_1
 
+for items in contacts_list:
+  for i, n in enumerate(items):
+    pat_2 = r'(\ )?(\,)?(\()?(доб.)(\ )?(\d*)(\))?'
+    if 'доб' in n:
+      res_2 = re.sub(pat_2, r'доб.\6', n)
+      print(res_2)
+      items[i] = res_2
 
-pattern = r'(\+?)(7|8)(\ ?)(\(?)(\d{3})(\)?)(\-?)(\ ?)(\d{3})(\-?)(\d{2})(\-?)(\d{2})'
-pattern_2 = r'(\ )?(\,)?(\()?(доб.)(\ )?(\d*)(\))?'
-result = re.sub(pattern, r'+7(\5)\9-\11-\13', str(contacts_list))
-result_2 = re.sub(pattern_2, r' доб.\6', str(result))
-
-
-print(result_2)
 
 
 with open("phonebook.csv", "w", encoding="utf-8") as f:
