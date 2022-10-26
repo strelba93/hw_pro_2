@@ -31,7 +31,6 @@ for items in contacts_list:
         pat_2 = r'(\ )?(\,)?(\()?(доб.)(\ )?(\d*)(\))?'
         if 'доб' in n:
             res_2 = re.sub(pat_2, r'доб.\6', n)
-            print(res_2)
             items[i] = res_2
 
 print(contacts_list)
@@ -45,20 +44,12 @@ for num, vals in enumerate(values):
         contacts_dict[num].update({key: val})
 
 
-# pprint(contacts_dict)
-#
-def lol(dict_name):
-    for dict_items in dict_name:
-        for i, a in dict_items:
-            return i
+pprint(contacts_dict)
 
 
-print(lol(contacts_dict))
+# with open("phonebook.csv", "w", encoding="utf-8") as f:
+#     # datawriter = csv.writer(f, delimiter=',')
+#     # Вместо contacts_list подставьте свой список
+#     # datawriter.writerows(result_2)
+# write_csv("phonebook.csv", contacts_dict)
 
-with open("phonebook.csv", "w", encoding="utf-8") as f:
-    datawriter = csv.writer(f, delimiter=',')
-    # Вместо contacts_list подставьте свой список
-    # datawriter.writerows(result_2)
-
-if __name__ == '__main__':
-    main()
