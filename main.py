@@ -37,48 +37,41 @@ for items in contacts_list:
 head = contacts_list[0]
 contacts_list.pop(0)
 
-pprint(contacts_list)
-pprint(head)
-
 fl_dict = {}
-fl_list = []
 for items in contacts_list:
-    fl_list.append(dict({items[0], items[1]: f'surname {items[2]}, organization {items[3]}, position {items[4]}, phone {items[5]}, email {items[6]}'}}))
+    fl_dict[items[0], items[1]] = dict({'surname': items[2], 'organization': items[3], 'position': items[4], 'phone': items[5], 'email': items[6]})
 
-for i in fl_list:
-    for k, v in i.items():
-        if v[0] == contacts_list[0][0]:
-            i['sfsdf'] = contacts_list[0][3]
+new_list = []
+new_list.append(head)
+print(new_list)
+for keys, values in fl_dict.items():
+    for n in contacts_list:
+        if values['surname'] == '' and keys[0] == n[0] and n[2] != '':
+            values['surname'] = n[2]
+        if values['organization'] == '' and keys[0] == n[0] and n[3] != '':
+            values['organization'] = n[3]
+        if values['position'] == '' and keys[0] == n[0] and n[4] != '':
+            values['position'] = n[4]
+        if values['phone'] == '' and keys[0] == n[0] and n[5] != '':
+            values['phone'] = n[5]
+        if values['email'] == '' and keys[0] == n[0] and n[6] != '':
+            values['email'] = n[6]
+    a = keys[0], keys[1], values['surname'], values['organization'], values['position'], values['phone'], values['email']
+    new_list.append(a)
 
-pprint(fl_list)
-# contacts_dict = []
-# keys = contacts_list[0]
-# values = contacts_list[1:]
-# for num, vals in enumerate(values):
-#     contacts_dict.append({})
-#     for key, val in zip(keys, vals):
-#         contacts_
-#           dict[num].update({key: val})
-
-
-# pprint(contacts_dict)
-
-
-# for items in contacts_dict:
-#     fls_dict = {}
-# pprint(fls_dict)
-
-
-# for i in contacts_dict:
-#     for k, v in i.items():
-#         fl_dict = {'firstname_lastname': [i['firstname'], i['lastname']], 'surname': i['surname'], 'organization': i['organization'], 'phone': i['phone'], 'position': i['position']}
 # pprint(fl_dict)
+# pprint(new_list)
 
 
 
-# with open("phonebook.csv", "w", encoding="utf-8") as f:
-#     # datawriter = csv.writer(f, delimiter=',')
-#     # Вместо contacts_list подставьте свой список
-#     # datawriter.writerows(result_2)
-# write_csv("phonebook.csv", contacts_dict)
 
+
+
+
+
+
+
+
+with open("phonebook.csv", "w") as f:
+    datawriter = csv.writer(f, delimiter=";")
+    datawriter.writerows(new_list)
