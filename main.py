@@ -33,18 +33,47 @@ for items in contacts_list:
             res_2 = re.sub(pat_2, r'доб.\6', n)
             items[i] = res_2
 
-print(contacts_list)
 
-contacts_dict = []
-keys = contacts_list[0]
-values = contacts_list[1:]
-for num, vals in enumerate(values):
-    contacts_dict.append({})
-    for key, val in zip(keys, vals):
-        contacts_dict[num].update({key: val})
+head = contacts_list[0]
+contacts_list.pop(0)
+
+pprint(contacts_list)
+pprint(head)
+
+fl_dict = {}
+fl_list = []
+for items in contacts_list:
+    fl_list.append(dict({items[0], items[1]: f'surname {items[2]}, organization {items[3]}, position {items[4]}, phone {items[5]}, email {items[6]}'}}))
+
+for i in fl_list:
+    for k, v in i.items():
+        if v[0] == contacts_list[0][0]:
+            i['sfsdf'] = contacts_list[0][3]
+
+pprint(fl_list)
+# contacts_dict = []
+# keys = contacts_list[0]
+# values = contacts_list[1:]
+# for num, vals in enumerate(values):
+#     contacts_dict.append({})
+#     for key, val in zip(keys, vals):
+#         contacts_
+#           dict[num].update({key: val})
 
 
-pprint(contacts_dict)
+# pprint(contacts_dict)
+
+
+# for items in contacts_dict:
+#     fls_dict = {}
+# pprint(fls_dict)
+
+
+# for i in contacts_dict:
+#     for k, v in i.items():
+#         fl_dict = {'firstname_lastname': [i['firstname'], i['lastname']], 'surname': i['surname'], 'organization': i['organization'], 'phone': i['phone'], 'position': i['position']}
+# pprint(fl_dict)
+
 
 
 # with open("phonebook.csv", "w", encoding="utf-8") as f:
